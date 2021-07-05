@@ -15,7 +15,7 @@ The new environment is named `murefi_env` and can be activated with `conda activ
 
 After that a Jupyter notebook server can be launched with `jupyter notebook`.
 
-Note: The only notebook not executable is `00_Preprocessing.ipynb`.
+Note: The only notebook not executable is `0.0 Preprocessing.ipynb`.
 This notebook relies on unpublished software. 
 However, all processed data is included as XLSX or HDF5 files in the `processed` directory and the data analysis can be re-run accordingly.
 
