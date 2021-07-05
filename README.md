@@ -4,6 +4,9 @@
 The material is organized by the chapter of first appearance in the manuscript.
 The `raw_data` directory contains unprocessed result files.
 
+Some of the MCMC trace files (`*.nc`) exceed GitHub's file upload size limit.
+We therefore decided to upload the `*.nc` files through [releases](https://github.com/JuBiotech/calibr8-paper/releases).
+
 # Installation
 A Python environment for running the notebooks can be created with the following command:
 
