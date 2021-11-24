@@ -37,6 +37,7 @@ params = {
 }
 
 DP_FIGURES = pathlib.Path(__file__).parent / "figures"
+DP_FIGURES.mkdir(exist_ok=True)
 
 matplotlib.rcParams.update(params)
 
