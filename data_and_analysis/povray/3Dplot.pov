@@ -1,5 +1,6 @@
 // This file describes a POV-Ray "scene" for the two 3D plots in the manuscript.
 // Show/hide the "dependent" and "independent" polygons here:
+// To specify output resolution enter "+W2250 +H1800" in the box right of the resolution dropdown.
 #declare show_dependent = false;
 #declare show_independent = true;
 
