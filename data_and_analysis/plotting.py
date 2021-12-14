@@ -42,7 +42,7 @@ DP_FIGURES.mkdir(exist_ok=True)
 matplotlib.rcParams.update(params)
 
 
-def savefig(fig, name: str, **kwargs):
+def savefig(fig, name: str, *, facecolor="white", **kwargs):
     """Saves a bitmapped and vector version of the figure.
 
     Parameters
@@ -54,8 +54,28 @@ def savefig(fig, name: str, **kwargs):
     **kwargs
         Additional kwargs for `pyplot.savefig`.
     """
+    if not "facecolor" in kwargs:
+        kwargs["facecolor"] = facecolor
+    max_pixels = numpy.array([2250, 2625])
+    max_dpi = min(max_pixels / fig.get_size_inches())
+    if not "dpi" in kwargs:
+        kwargs["dpi"] = max_dpi
     fig.savefig(DP_FIGURES / f"{name}.png", **kwargs)
     fig.savefig(DP_FIGURES / f"{name}.pdf", **kwargs)
+    # Save with & without border to measure the "shrink".
+    # This is needed to rescale the dpi setting such that we get max pixels also without the border.
+    tkwargs = dict(
+        pil_kwargs={"compression": "tiff_lzw"},
+        bbox_inches="tight",
+        pad_inches=0.01,
+    )
+    tkwargs.update(kwargs)
+    fp = str(DP_FIGURES / f"{name}.tif")
+    fig.savefig(fp, **tkwargs)
+    # Measure the size
+    actual = numpy.array(pyplot.imread(fp).shape[:2][::-1])
+    tkwargs["dpi"] = int(tkwargs["dpi"] * min(max_pixels / actual))
+    fig.savefig(fp, **tkwargs)
     return
 
 
